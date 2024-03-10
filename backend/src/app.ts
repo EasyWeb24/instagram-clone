@@ -1,16 +1,22 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import postRoute from './routes/PostRoute';
 import userRoute from './routes/UserRoute';
 
-main().catch((err) => console.log(err));
+dotenv.config();
+
+const { MONGODB_USER, MONGODB_PASSWORD } = process.env;
 
 async function main() {
   await mongoose.connect(
-    'mongodb+srv://josephOri2023:coder2005@cluster0.rbivpfa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+    `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@cluster0.rbivpfa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+`
   );
 }
+
+main().catch((err) => console.log(err));
 
 const app = express();
 const port = 3000;

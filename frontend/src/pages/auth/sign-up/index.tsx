@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, Grid, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -13,13 +13,27 @@ const Index = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        placeholder="email"
-        type="email"
-        fullWidth
-        {...register('email')}
-        required
-      ></TextField>
+      <Grid container gap={2}>
+        <Grid item>
+          <TextField
+            placeholder="email"
+            type="email"
+            fullWidth
+            {...register('email')}
+            required
+          ></TextField>
+        </Grid>
+        <Grid item>
+          <TextField
+            placeholder="email"
+            type="email"
+            fullWidth
+            {...register('email')}
+            required
+          ></TextField>
+        </Grid>
+      </Grid>
+
       <br />
       <Button variant="contained" color="primary" type="submit">
         Add User
