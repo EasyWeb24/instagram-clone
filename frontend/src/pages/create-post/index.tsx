@@ -4,21 +4,28 @@ import { useForm } from 'react-hook-form';
 const CreatePost = () => {
   const { register, handleSubmit } = useForm();
   return (
-    <>
+    <Box p={2} py={4}>
       <Typography>Create Post</Typography>
-      <Box>
+      <Box borderTop={'1px solid hsl(0, 0%, 85%)'}>
         <form
+        
           onSubmit={handleSubmit(({ postImage, caption }) => {
-            console.log({ postImage, caption });
+
+         const formData = new FormData()
+         formData.append('caption', caption)
+                  formData.append('postImage', postImage)
+                  console.log(formData)
+
           })}
         >
-          <Grid container gap={{ xs: 2 }} marginTop={4} width={'100%'}>
+          <Grid container gap={{ xs: 2 }} marginTop={3} width={'100%'}>
             <Grid item width={'100%'}>
               <input {...register('postImage')} type="file" required />
             </Grid>
             <Grid item width={'100%'}>
               <TextField
                 fullWidth
+                autoComplete="off"
                 placeholder="Caption..."
                 {...register('caption')}
                 type="text"
@@ -33,7 +40,7 @@ const CreatePost = () => {
           </Box>
         </form>
       </Box>
-    </>
+    </Box>
   );
 };
 

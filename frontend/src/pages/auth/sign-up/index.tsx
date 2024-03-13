@@ -7,7 +7,7 @@ const Index = () => {
 
   const onSubmit = async (data: { email: string }) => {
     await axios
-      .post('http://localhost:3000/post', data)
+      .post('http://localhost:3000/user', data)
       .then((res) => console.log(res))
       .catch((err) => console.warn(err.message));
   };
