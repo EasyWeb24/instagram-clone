@@ -2,8 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import multer from 'multer';
 import postRoute from './routes/PostRoute';
 import userRoute from './routes/UserRoute';
+
+const upload = multer({
+  dest: 'uploads/',
+});
 
 dotenv.config();
 
@@ -27,7 +32,7 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use('/post', postRoute);
+app.use('/post', upload.single('postImage'), postRoute);
 app.use('/user', userRoute);
 
 app.listen(port, () => {

@@ -1,4 +1,5 @@
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 const CreatePost = () => {
@@ -8,14 +9,17 @@ const CreatePost = () => {
       <Typography>Create Post</Typography>
       <Box borderTop={'1px solid hsl(0, 0%, 85%)'}>
         <form
-        
-          onSubmit={handleSubmit(({ postImage, caption }) => {
-
-         const formData = new FormData()
-         formData.append('caption', caption)
-                  formData.append('postImage', postImage)
-                  console.log(formData)
-
+          onSubmit={handleSubmit((data) => {
+            console.log({ ...data, postImage: data.postImage[0] });
+            axios('http://localhost:3000/post', {
+              method: 'POST',
+              data,
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            })
+              .then(console.log)
+              .catch(console.warn);
           })}
         >
           <Grid container gap={{ xs: 2 }} marginTop={3} width={'100%'}>
