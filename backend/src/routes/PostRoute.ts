@@ -16,11 +16,13 @@ postRoute.get('/', async (req: Request, res: Response) => {
 
 postRoute.post('/', async (req: Request, res: Response) => {
   try {
-    const post = new Post({ caption: req.body.caption });
+    const post = new Post({
+      caption: req.body.caption,
+      postImage: req.file.filename,
+    });
     await post.save();
     return res.status(201).send({
       success: 'Your post was successfully added',
-      file: req.files,
       post,
     });
   } catch (error) {

@@ -13,7 +13,7 @@ const CreatePost = () => {
             console.log({ ...data, postImage: data.postImage[0] });
             axios('http://localhost:3000/post', {
               method: 'POST',
-              data,
+              data: { ...data, postImage: data.postImage[0] },
               headers: {
                 'Content-Type': 'multipart/form-data',
               },
