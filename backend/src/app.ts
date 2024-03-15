@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/post', upload.single('postImage'), postRoute);
-app.use('/user', userRoute);
+app.use('/auth', userRoute);
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);

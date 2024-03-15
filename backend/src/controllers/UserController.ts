@@ -11,7 +11,7 @@ export const signup = async (req: Request, res: Response) => {
       return res.status(400).send({ message: 'User already exists' });
 
     bcrypt.genSalt(10, (err, salt) => {
-      res.status(400).send({ message: (err as Error).message });
+      if (err) return res.status(400).send({ message: (err as Error).message });
 
       bcrypt.hash(req.body.password, salt, async (err, hash) => {
         if (err)
@@ -23,7 +23,7 @@ export const signup = async (req: Request, res: Response) => {
         });
         await user.save();
 
-        const token = jwt.sign(user, process.env.TOKEN_SECRET, {
+        const token = jwt.sign(user.toJSON(), process.env.TOKEN_SECRET, {
           expiresIn: '30d',
         });
 
